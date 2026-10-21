@@ -59,7 +59,7 @@ const cours = [
     duree: "55 min",
     coach: "Théo Garnier",
     image: "assets/images/pilates.svg",
-    prix: 11,
+    prix: 0,
     creneaux: [
       { id: "pil-mar-0900", jour: "Mardi", heure: "09:00", occupes: ["A5", "A6", "B5", "B6"] },
       { id: "pil-jeu-1900", jour: "Jeudi", heure: "19:00", occupes: ["C1", "C2", "D5", "E3", "E4"] },
