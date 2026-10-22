@@ -21,7 +21,7 @@ const cours = [
     creneaux: [
       { id: "yoga-lun-1830", jour: "Lundi", heure: "18:30", occupes: ["A2", "B3", "B4", "D1", "E5"] },
       { id: "yoga-mer-1230", jour: "Mercredi", heure: "12:30", occupes: ["A1", "A2", "C3", "C4"] },
-      { id: "yoga-ven-1900", jour: "Vendredi", heure: "19:00", occupes: ["B1", "B2", "B5", "D3", "D4", "E1", "E2"] }
+      { id: " yoga-ven-1900", jour: "Vendredi", heure: "19:00", occupes: ["B1", "B2", "B5", "D3", "D4", "E1", "E2"] }
     ]
   },
   {
@@ -59,7 +59,7 @@ const cours = [
     duree: "55 min",
     coach: "Théo Garnier",
     image: "assets/images/pilates.svg",
-    prix: 0,
+    prix: 11,
     creneaux: [
       { id: "pil-mar-0900", jour: "Mardi", heure: "09:00", occupes: ["A5", "A6", "B5", "B6"] },
       { id: "pil-jeu-1900", jour: "Jeudi", heure: "19:00", occupes: ["C1", "C2", "D5", "E3", "E4"] },

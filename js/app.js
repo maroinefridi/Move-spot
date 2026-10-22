@@ -19,14 +19,15 @@ console.log(cours);
 // ÉTAPE 1 : Sélectionner les éléments du DOM
 // ------------------------------------------------------------
 // Identifiants disponibles dans index.html :
-//  courses-container, selected-course-title, slots-container,
-//  seats-container, summary-course, summary-slot, summary-seats,
+//  courses-container, selected-course-title,summary-slot, summary-seats,
 //  summary-count, summary-total, confirm-button, message
 // TODO : récupérez ces éléments et rangez-les dans des constantes.
-// Question : quelle est la différence entre getElementById et querySelector ?
+// Question : quelle est la différence e-title, slots-container,
+//  seats-container, summary-course, ntre getElementById et querySelector ?
 
 const coursesContainer = document.getElementById('courses-container');
 const selectedCourseTitle = document.getElementById('selected-course-title');
+const slotsContainer = document.getElementById('slots-container')
 const slotsSeat = document.getElementById('summary-seats');
 const seatsContainer = document.getElementById('seats-container');
 const summaryCourse = document.getElementById('summary-course');
@@ -61,9 +62,9 @@ const message = document.getElementById('message');
 let templates = "";
 
 cours.forEach((cour) => {
- 
-    templates +=` 
-<article class="cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm ring-2 ring-teal-600 transition hover:shadow-md" data-id="yoga">
+
+    templates += ` 
+<article class="cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm transition hover:shadow-md" data-id="${cour.id}">
         <img src="${cour.image}" alt="${cour.nom}" class="h-36 w-full object-cover" />
         <div class="space-y-1 p-4">
           <span class="inline-block rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">${cour.categorie}</span>
@@ -73,7 +74,8 @@ cours.forEach((cour) => {
         </div>
       </article>
           `
-          coursesContainer.innerHTML = templates; 
+    coursesContainer.innerHTML = templates;
+
 });
 
 // ------------------------------------------------------------
@@ -88,8 +90,21 @@ cours.forEach((cour) => {
 //  - Comment retrouver le cours à partir de l'id lu dans la carte ?
 //  - Que faut-il réinitialiser quand on change de cours ?
 
+const cards = document.querySelectorAll('#courses-container article')
+let myId;
 
+cards.forEach(card => {
 
+    card.addEventListener('click', () => {
+        cards.forEach(c => {
+            c.classList.remove('ring-2', 'ring-teal-600');
+        });
+        card.classList.add('ring-2', 'ring-teal-600');
+
+        afficherCreneau(card);
+
+    });
+});
 
 // ------------------------------------------------------------
 // ÉTAPE 5 : Afficher et sélectionner un créneau (US03)
@@ -101,6 +116,35 @@ cours.forEach((cour) => {
 // Questions :
 //  - Quand cette fonction doit-elle être appelée ?
 //  - Que se passe-t-il si aucun cours n'est encore sélectionné ?
+
+const afficherCreneau = (card) => {
+    myId = card.dataset.id;
+    selectedCourseTitle.textContent = myId;
+    const cour = cours.find(item => item.id == myId);
+    let slotes = "";
+    cour.creneaux.forEach(c => {
+        slotes += `
+    <button type="button" class="rounded-xl border px-4 py-2 text-sm font-medium transition border-teal-600 " data-id="${c.id}">
+        ${c.jour} <span class="font-normal">${c.heure}</span>
+      </button>
+      `
+        slotsContainer.innerHTML = slotes;
+        selectedCreaneaux();
+    });
+
+};
+
+const selectedCreaneaux = () => {
+    const dateBtn = document.querySelectorAll('#slots-container button')
+    dateBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            dateBtn.forEach(B => {
+                B.classList.remove('bg-teal-700','text-white');
+            })
+            btn.classList.add('bg-teal-700','text-white');
+        });
+    });
+};
 
 
 // ------------------------------------------------------------
@@ -114,6 +158,7 @@ cours.forEach((cour) => {
 //  - Comment construire "A1" à partir d'une rangée et d'un numéro ?
 //  - Comment savoir si un emplacement est dans la liste des occupés (includes) ?
 //  - Faut-il une boucle imbriquée ? Pourquoi ?
+
 
 
 // ------------------------------------------------------------
