@@ -139,13 +139,13 @@ const selectedCreaneaux = () => {
     dateBtn.forEach(btn => {
         btn.addEventListener('click', () => {
             dateBtn.forEach(B => {
-                B.classList.remove('bg-teal-700','text-white');
+                B.classList.remove('bg-teal-700', 'text-white');
             })
-            btn.classList.add('bg-teal-700','text-white');
+            btn.classList.add('bg-teal-700', 'text-white');
+            afficherPlan();
         });
     });
 };
-
 
 // ------------------------------------------------------------
 // ÉTAPE 6 : Afficher le plan de la salle (US04)
@@ -159,7 +159,27 @@ const selectedCreaneaux = () => {
 //  - Comment savoir si un emplacement est dans la liste des occupés (includes) ?
 //  - Faut-il une boucle imbriquée ? Pourquoi ?
 
+const afficherPlan = () => {
+    let seats='';
+    rangees.forEach(range => {
+        for (let i = 1; i <= tapisParRangee; i++) {
+            seats += `<button type="button" class="seat h-11 rounded-lg text-xs font-semibold transition
+     border border-slate-300 bg-white text-slate-700 hover:border-teal-600"
+      data-id="${range}${i}" aria-label="Tapis A1 libre">${range}${i}</button>`
+    };
+    seatsContainer.innerHTML=seats;
+    });
+    findOccupes(seats);
+};
 
+const findOccupes = (seats) =>{
+    cours.forEach( cour=>{
+        const btn = seatsBttn.dataset.id;
+        if(cour.creneaux ==  btn ){
+            seatsBttn.classList.add('bg-slate-300');
+        };
+    });
+};
 
 // ------------------------------------------------------------
 // ÉTAPE 7 : Sélectionner / désélectionner des emplacements (US05)
